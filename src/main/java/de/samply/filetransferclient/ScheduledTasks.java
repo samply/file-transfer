@@ -10,7 +10,7 @@ public class ScheduledTasks {
   @Autowired
   private FileTransferTask fileTransferTask;
 
-  @Scheduled(cron = "${TRANSFER_FILES_CRON_EXPR:#{'-'}}")
+  @Scheduled(cron = FileTransferConst.TRANSFER_FILES_CRON_EXPR)
   public void transferFiles() {
     fileTransferTask.transfer();
   }
