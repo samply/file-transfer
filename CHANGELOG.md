@@ -9,3 +9,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - REST API Client for data transfer
 - Docker
+- Documentation
