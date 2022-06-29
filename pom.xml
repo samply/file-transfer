@@ -5,13 +5,12 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.0</version>
+		<version>2.7.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>de.samply</groupId>
 	<artifactId>file-transfer</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<packaging>war</packaging>
 	<name>file-transfer-client</name>
 	<description>Client for transfering data between bridgeheads</description>
 	<properties>
@@ -31,12 +30,6 @@
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
@@ -50,6 +43,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>file-transfer</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
