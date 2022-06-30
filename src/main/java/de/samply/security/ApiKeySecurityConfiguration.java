@@ -11,6 +11,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
+/**
+ * Configuration of Spring Boot Security.
+ */
 @Configuration
 @EnableWebSecurity
 @Order(1)
@@ -18,6 +21,13 @@ public class ApiKeySecurityConfiguration {
 
   private ApiKeyAuthenticationManager apiKeyAuthenticationManager;
 
+  //TODO : integration test
+  /**
+   * TODO
+   * @param httpSecurity
+   * @return
+   * @throws Exception
+   */
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
 

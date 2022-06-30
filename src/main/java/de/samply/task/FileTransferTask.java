@@ -13,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+/**
+ * TODO
+ */
 @Component
 public class FileTransferTask {
 
@@ -33,6 +36,9 @@ public class FileTransferTask {
     this.transferFilesDirectory = Paths.get(transferFilesDirectory);
   }
 
+  /**
+   * TODO
+   */
   public void transfer() {
 
     logger.info("Sending files to transfer...");

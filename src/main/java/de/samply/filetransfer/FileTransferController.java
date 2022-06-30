@@ -18,9 +18,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+/**
+ * REST API of application for file transfer FileTransferController: Controller connects file
+ * directory for transfer.
+ */
+
 @RestController
 public class FileTransferController {
-
 
   private Path transferFilesDirectory;
 
@@ -32,6 +36,11 @@ public class FileTransferController {
     this.transferFilesDirectory = Paths.get(transferFilesDirectory);
   }
 
+  // TODO: Integration Test
+  /**
+   * TODO
+   * @return
+   */
   @GetMapping(FileTransferConst.INFO_URL)
   public ResponseEntity<String> info() {
     return new ResponseEntity<>(projectVersion, HttpStatus.OK);
@@ -60,6 +69,12 @@ public class FileTransferController {
     return model.getGroupId() + ':' + model.getArtifactId() + ':' + model.getVersion();
   }
 
+  // TODO: Integration Test
+  /**
+   * TODO
+   * @param multipartFile
+   * @return
+   */
   @PostMapping(FileTransferConst.TRANSFER_URL)
   public ResponseEntity transferFile(
       @RequestParam(FileTransferConst.TRANSFER_FILE_PARAMETER) MultipartFile multipartFile) {

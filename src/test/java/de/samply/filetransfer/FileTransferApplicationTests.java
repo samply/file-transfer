@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 @Disabled
 @SpringBootTest
 @ComponentScan(basePackages = {"de.samply"})
-class FileTransferClientTests {
+class FileTransferApplicationTests {
 
   @Test
   void contextLoads() {

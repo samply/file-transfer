@@ -16,8 +16,12 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ * Transfer file to a second bridgehead.
+ */
 @Component
 public class FileTransfer {
+
 
   @Value(FileTransferConst.TARGET_BRIDGEHEAD_URL)
   private String targetBridgeheadUrl;
@@ -25,6 +29,12 @@ public class FileTransfer {
   @Value(FileTransferConst.TARGET_BRIDGEHEAD_APIKEY)
   private String targetBridgeheadApiKey;
 
+  /**
+   * TODO:
+   *
+   * @param path
+   * @throws FileTransferException
+   */
   public void transfer(Path path) throws FileTransferException {
 
     RestTemplate restTemplate = new RestTemplate();
