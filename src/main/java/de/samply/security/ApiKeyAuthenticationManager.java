@@ -1,6 +1,6 @@
 package de.samply.security;
 
-import de.samply.filetransferclient.FileTransferConst;
+import de.samply.filetransfer.FileTransferConst;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;

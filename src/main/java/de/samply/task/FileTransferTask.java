@@ -1,5 +1,8 @@
-package de.samply.filetransferclient;
+package de.samply.task;
 
+import de.samply.filetransfer.FileTransfer;
+import de.samply.filetransfer.FileTransferConst;
+import de.samply.filetransfer.FileTransferException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,12 +16,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class FileTransferTask {
 
-  private Logger logger = LoggerFactory.getLogger(FileTransferTask.class);
+  private final Logger logger = LoggerFactory.getLogger(FileTransferTask.class);
 
-  @Autowired
   private FileTransfer fileTransfer;
 
   private Path transferFilesDirectory;
+
+  @Autowired
+  public void setFileTransfer(FileTransfer fileTransfer) {
+    this.fileTransfer = fileTransfer;
+  }
 
   @Autowired
   public void setTransferFilesDirectory(
@@ -40,7 +47,7 @@ public class FileTransferTask {
       Files
           .walk(transferFilesDirectory)
           .filter(Files::isRegularFile)
-          .forEach((path) -> sendAndDeletePath(path));
+          .forEach(this::sendAndDeletePath);
 
     } catch (IOException e) {
       logger.error(

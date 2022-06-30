@@ -1,4 +1,4 @@
-package de.samply.filetransferclient;
+package de.samply.filetransfer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,10 +8,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 @ComponentScan(basePackages = {"de.samply"})
 @EnableScheduling
-public class FileTransferClientApplication {
+public class FileTransferApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(FileTransferClientApplication.class, args);
+    SpringApplication.run(FileTransferApplication.class, args);
   }
 
 }
