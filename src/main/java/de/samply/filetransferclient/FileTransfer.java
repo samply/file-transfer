@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -29,9 +30,12 @@ public class FileTransfer {
     RestTemplate restTemplate = new RestTemplate();
     HttpEntity httpEntity = new HttpEntity(createBody(path), createHeaders());
 
-    //TODO
     ResponseEntity<String> response = restTemplate.postForEntity(targetBridgeheadUrl, httpEntity,
         String.class);
+
+    if (response.getStatusCode() != HttpStatus.OK){
+      throw new FileTransferException(response.getStatusCode().toString()+"-"+path.getFileName());
+    }
 
   }
 

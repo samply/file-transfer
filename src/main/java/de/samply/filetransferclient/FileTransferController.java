@@ -73,21 +73,17 @@ public class FileTransferController {
   public ResponseEntity transferFile(
       @RequestParam(FileTransferConst.TRANSFER_FILE_PARAMETER) MultipartFile multipartFile) {
 
-    storeInTransferFileDirectory(multipartFile);
-    return ResponseEntity.ok().body("File stored!");
-
-  }
-
-  private void storeInTransferFileDirectory(MultipartFile multipartFile) {
     try {
-      storeInTransferFileDirectory_withoutManagementException(multipartFile);
+      storeInTransferFileDirectory(multipartFile);
+      return ResponseEntity.ok().body("File stored!");
+
     } catch (IOException e) {
-      e.printStackTrace();
-      //TODO: do something
+      return ResponseEntity.badRequest().body(e.getMessage());
     }
+
   }
 
-  private void storeInTransferFileDirectory_withoutManagementException(MultipartFile multipartFile)
+  private void storeInTransferFileDirectory(MultipartFile multipartFile)
       throws IOException {
     Path localFile = transferFilesDirectory.resolve(multipartFile.getOriginalFilename());
     multipartFile.transferTo(localFile);
