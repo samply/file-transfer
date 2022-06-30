@@ -1,4 +1,4 @@
-package de.samply.filetransferclient;
+package de.samply.filetransfer;
 
 public class FileTransferException extends Exception {
 

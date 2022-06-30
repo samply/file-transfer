@@ -1,15 +1,15 @@
-package de.samply.filetransferclient;
+package de.samply.filetransfer;
 
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,7 +38,7 @@ public class FileTransferController {
   }
 
 
-  private String getProjectVersion(){
+  private String getProjectVersion() {
     try {
       return getProjectVersion_WithoutManagementException();
     } catch (IOException | XmlPullParserException e) {
@@ -56,17 +56,8 @@ public class FileTransferController {
 
   }
 
-  private String fetchVersion(Model model){
-
-    StringBuilder stringBuilder = new StringBuilder();
-    stringBuilder.append(model.getGroupId());
-    stringBuilder.append(':');
-    stringBuilder.append(model.getArtifactId());
-    stringBuilder.append(':');
-    stringBuilder.append(model.getVersion());
-
-    return stringBuilder.toString();
-
+  private String fetchVersion(Model model) {
+    return model.getGroupId() + ':' + model.getArtifactId() + ':' + model.getVersion();
   }
 
   @PostMapping(FileTransferConst.TRANSFER_URL)
@@ -85,8 +76,17 @@ public class FileTransferController {
 
   private void storeInTransferFileDirectory(MultipartFile multipartFile)
       throws IOException {
-    Path localFile = transferFilesDirectory.resolve(multipartFile.getOriginalFilename());
+
+    String filename =
+        (multipartFile.getOriginalFilename() != null) ? multipartFile.getOriginalFilename()
+            : generateRandomFilename();
+    Path localFile = transferFilesDirectory.resolve(filename);
     multipartFile.transferTo(localFile);
+
+  }
+
+  private String generateRandomFilename() {
+    return RandomStringUtils.random(10, true, false);
   }
 
 }

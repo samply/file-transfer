@@ -1,7 +1,7 @@
 package de.samply.security;
 
 
-import de.samply.filetransferclient.FileTransferConst;
+import de.samply.filetransfer.FileTransferConst;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +16,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @Order(1)
 public class ApiKeySecurityConfiguration {
 
-  @Autowired
   private ApiKeyAuthenticationManager apiKeyAuthenticationManager;
 
   @Bean
@@ -34,6 +33,12 @@ public class ApiKeySecurityConfiguration {
 
     return httpSecurity.build();
 
+  }
+
+  @Autowired
+  public void setApiKeyAuthenticationManager(
+      ApiKeyAuthenticationManager apiKeyAuthenticationManager) {
+    this.apiKeyAuthenticationManager = apiKeyAuthenticationManager;
   }
 
   @Bean

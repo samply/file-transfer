@@ -12,13 +12,14 @@
 	<artifactId>file-transfer</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<name>file-transfer-client</name>
-	<description>Client for transfering data between bridgeheads</description>
+	<description>Client for transferring data between bridgeheads</description>
 
 	<properties>
 		<java.version>17</java.version>
 		<maven-model.version>3.8.6</maven-model.version>
 		<slf4j-api.version>1.7.36</slf4j-api.version>
 		<log4j-slf4j-impl.version>2.17.2</log4j-slf4j-impl.version>
+		<commons-lang3.version>3.12.0</commons-lang3.version>
 	</properties>
 
 	<dependencies>
@@ -62,6 +63,11 @@
 			<version>${log4j-slf4j-impl.version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons-lang3.version}</version>
+		</dependency>
 
 	</dependencies>
 

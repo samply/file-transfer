@@ -1,6 +1,6 @@
 package de.samply.security;
 
-import de.samply.filetransferclient.FileTransferConst;
+import de.samply.filetransfer.FileTransferConst;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.security.web.authentication.preauth.AbstractPreAuthenticatedProcessingFilter;
 
