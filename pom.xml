@@ -13,9 +13,12 @@
 	<version>1.0.0-SNAPSHOT</version>
 	<name>file-transfer-client</name>
 	<description>Client for transfering data between bridgeheads</description>
+
 	<properties>
 		<java.version>17</java.version>
 		<maven-model.version>3.8.6</maven-model.version>
+		<slf4j-api.version>1.7.36</slf4j-api.version>
+		<log4j-slf4j-impl.version>2.17.2</log4j-slf4j-impl.version>
 	</properties>
 
 	<dependencies>
@@ -46,6 +49,19 @@
 			<artifactId>maven-model</artifactId>
 			<version>${maven-model.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j-api.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j-impl</artifactId>
+			<version>${log4j-slf4j-impl.version}</version>
+		</dependency>
+
 
 	</dependencies>
 

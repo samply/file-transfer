@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -27,11 +28,15 @@ public class FileTransfer {
   public void transfer(Path path) throws FileTransferException {
 
     RestTemplate restTemplate = new RestTemplate();
-    HttpEntity httpEntity = new HttpEntity(createBody(path), createHeaders());
+    HttpEntity<MultiValueMap<String, Object>> httpEntity = new HttpEntity<>(createBody(path),
+        createHeaders());
 
-    //TODO
     ResponseEntity<String> response = restTemplate.postForEntity(targetBridgeheadUrl, httpEntity,
         String.class);
+
+    if (response.getStatusCode() != HttpStatus.OK) {
+      throw new FileTransferException(response.getStatusCode() + "-" + path.getFileName());
+    }
 
   }
 
@@ -49,13 +54,13 @@ public class FileTransfer {
 
   private MultiValueMap<String, Object> createBody(Path path) throws FileTransferException {
 
-    MultiValueMap<String, Object> fileMultiValueMap = new LinkedMultiValueMap<>();
+    MultiValueMap<String, String> fileMultiValueMap = new LinkedMultiValueMap<>();
     ContentDisposition contentDisposition = createContentDisposition(path);
     fileMultiValueMap.add(HttpHeaders.CONTENT_DISPOSITION, contentDisposition.toString());
 
-    HttpEntity fileHttpEntity = new HttpEntity(convertToBytes(path), fileMultiValueMap);
+    HttpEntity<byte[]> fileHttpEntity = new HttpEntity<>(convertToBytes(path), fileMultiValueMap);
 
-    MultiValueMap body = new LinkedMultiValueMap();
+    MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
     body.add(FileTransferConst.TRANSFER_FILE_PARAMETER, fileHttpEntity);
 
     return body;
@@ -63,11 +68,8 @@ public class FileTransfer {
   }
 
   private ContentDisposition createContentDisposition(Path path) {
-    return ContentDisposition
-        .builder("form-data")
-        .name("file")
-        .filename(path.getFileName().toString())
-        .build();
+    return ContentDisposition.builder("form-data").name("file")
+        .filename(path.getFileName().toString()).build();
   }
 
   private byte[] convertToBytes(Path path) throws FileTransferException {

@@ -4,12 +4,16 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 public class FileTransferTask {
+
+  private final Logger logger = LoggerFactory.getLogger(FileTransferTask.class);
 
   @Autowired
   private FileTransfer fileTransfer;
@@ -22,10 +26,12 @@ public class FileTransferTask {
     this.transferFilesDirectory = Paths.get(transferFilesDirectory);
   }
 
-  // TODO
   public void transfer() {
-    System.out.println("Scheduled Task!");
+
+    logger.info("Sending files to transfer...");
     sendAndDeleteAllPaths();
+    logger.info("Sending files ended");
+
   }
 
   private void sendAndDeleteAllPaths() {
@@ -37,8 +43,9 @@ public class FileTransferTask {
           .forEach((path) -> sendAndDeletePath(path));
 
     } catch (IOException e) {
-      e.printStackTrace();
-      //TODO: do something
+      logger.error(
+          "Error reading files to transfer in directory " + transferFilesDirectory.toAbsolutePath(),
+          e);
     }
 
   }
@@ -47,11 +54,9 @@ public class FileTransferTask {
     try {
       sendAndDeletePath_WithoutManagementException(path);
     } catch (FileTransferException e) {
-      e.printStackTrace();
-      //TODO
+      logger.error("Error transferring file " + path.getFileName(), e);
     } catch (IOException e) {
-      e.printStackTrace();
-      //TODO
+      logger.error("Error deleting file " + path.getFileName(), e);
     }
 
   }
@@ -60,7 +65,6 @@ public class FileTransferTask {
       throws FileTransferException, IOException {
 
     fileTransfer.transfer(path);
-    // TODO: Check if file was successfully transferred. If yes:
     Files.delete(path);
 
   }
