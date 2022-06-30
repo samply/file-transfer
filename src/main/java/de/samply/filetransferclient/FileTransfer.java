@@ -29,7 +29,7 @@ public class FileTransfer {
     RestTemplate restTemplate = new RestTemplate();
     HttpEntity httpEntity = new HttpEntity(createBody(path), createHeaders());
 
-    //TODO: change string.class
+    //TODO
     ResponseEntity<String> response = restTemplate.postForEntity(targetBridgeheadUrl, httpEntity,
         String.class);
 
