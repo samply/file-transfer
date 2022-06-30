@@ -21,6 +21,12 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 public class FileTransferController {
 
+  /*
+  * FileTransferController: Controller connects file directory for transfer.
+  * GetMapping for REST interface usage.
+  * Response Entity is used to Manipulate HTTP response.
+  * */
+
 
   private Path transferFilesDirectory;
 

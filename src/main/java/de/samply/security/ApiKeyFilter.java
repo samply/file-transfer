@@ -6,6 +6,10 @@ import org.springframework.security.web.authentication.preauth.AbstractPreAuthen
 
 public class ApiKeyFilter extends AbstractPreAuthenticatedProcessingFilter {
 
+  /*
+  * API key filer : this class generates servlet request to http server for data including parameters and an input stream.
+  */
+
   @Override
   protected Object getPreAuthenticatedPrincipal(HttpServletRequest request) {
     return request.getHeader(FileTransferConst.API_KEY_HEADER);

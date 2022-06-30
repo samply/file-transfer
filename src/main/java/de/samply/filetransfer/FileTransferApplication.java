@@ -10,6 +10,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 public class FileTransferApplication {
 
+  /*
+  * FileTransferApplication: Application helps to transfer data between two bridgehead with healp of REST interface
+  * */
+
   public static void main(String[] args) {
     SpringApplication.run(FileTransferApplication.class, args);
   }

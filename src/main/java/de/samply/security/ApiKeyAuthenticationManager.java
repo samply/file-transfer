@@ -12,6 +12,10 @@ import org.springframework.util.ObjectUtils;
 @Component
 public class ApiKeyAuthenticationManager implements AuthenticationManager {
 
+  /*
+   * Security: This class provides API key support to REST for connecting different server
+   */
+
   @Value(FileTransferConst.CLIENT_API_KEY)
   private String apiKey;
 

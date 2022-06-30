@@ -19,6 +19,9 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class FileTransfer {
 
+  /*
+  * FileTransfer : It connects API key and target location to send file  */
+
   @Value(FileTransferConst.TARGET_BRIDGEHEAD_URL)
   private String targetBridgeheadUrl;
 

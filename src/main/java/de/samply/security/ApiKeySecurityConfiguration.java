@@ -16,6 +16,11 @@ import org.springframework.security.web.SecurityFilterChain;
 @Order(1)
 public class ApiKeySecurityConfiguration {
 
+  /*
+  * ApiKeyAuthenticationManager : It authenticates Spring security for connecting two locations
+  *                               provides security based on keyfilter
+  * */
+
   private ApiKeyAuthenticationManager apiKeyAuthenticationManager;
 
   @Bean
