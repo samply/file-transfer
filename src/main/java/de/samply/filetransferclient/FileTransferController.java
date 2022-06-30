@@ -24,7 +24,7 @@ public class FileTransferController {
 
   private Path transferFilesDirectory;
 
-  private String projectVersion = getProjectVersion();
+  private final String projectVersion = getProjectVersion();
 
   @Autowired
   public void setTransferFilesDirectory(

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class FileTransferTask {
 
-  private Logger logger = LoggerFactory.getLogger(FileTransferTask.class);
+  private final Logger logger = LoggerFactory.getLogger(FileTransferTask.class);
 
   @Autowired
   private FileTransfer fileTransfer;
