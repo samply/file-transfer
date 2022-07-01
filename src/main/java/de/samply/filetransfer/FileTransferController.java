@@ -18,15 +18,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+/**
+ * REST API of application for file transfer FileTransferController: Controller connects file
+ * directory for transfer.
+ */
 @RestController
 public class FileTransferController {
-
-  /*
-  * FileTransferController: Controller connects file directory for transfer.
-  * GetMapping for REST interface usage.
-  * Response Entity is used to Manipulate HTTP response.
-  * */
-
 
   private Path transferFilesDirectory;
 
@@ -34,10 +31,18 @@ public class FileTransferController {
 
   @Autowired
   public void setTransferFilesDirectory(
-      @Value(FileTransferConst.TRANSFER_DIRECTORY) String transferFilesDirectory) {
+      @Value(FileTransferConst.TRANSFER_FILES_DIRECTORY) String transferFilesDirectory) {
     this.transferFilesDirectory = Paths.get(transferFilesDirectory);
   }
 
+  //TODO: Integration Test
+
+
+  /**
+   * Get Mapping for receiving file in second bridgehead.
+   *
+   * @return Version of File Transfer.
+   */
   @GetMapping(FileTransferConst.INFO_URL)
   public ResponseEntity<String> info() {
     return new ResponseEntity<>(projectVersion, HttpStatus.OK);
@@ -66,6 +71,14 @@ public class FileTransferController {
     return model.getGroupId() + ':' + model.getArtifactId() + ':' + model.getVersion();
   }
 
+  // TODO: Integration Test
+
+  /**
+   * Post file to bridgehead. The file will temporary stored in transfer files directory.
+   *
+   * @param multipartFile File to be transferred.
+   * @return ResponseEntity HTTP Status.
+   */
   @PostMapping(FileTransferConst.TRANSFER_URL)
   public ResponseEntity transferFile(
       @RequestParam(FileTransferConst.TRANSFER_FILE_PARAMETER) MultipartFile multipartFile) {

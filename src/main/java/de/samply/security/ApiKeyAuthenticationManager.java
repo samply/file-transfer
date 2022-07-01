@@ -9,6 +9,9 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 
+/**
+ * Provides authentication manager based on an api key for REST calls.
+ */
 @Component
 public class ApiKeyAuthenticationManager implements AuthenticationManager {
 
@@ -19,6 +22,13 @@ public class ApiKeyAuthenticationManager implements AuthenticationManager {
   @Value(FileTransferConst.CLIENT_API_KEY)
   private String apiKey;
 
+  /**
+   * Authenticates request based on an API key.
+   *
+   * @param authentication REST API Client authentication.
+   * @return Authentication with setAuthenticated set to true or false.
+   * @throws AuthenticationException Authentication exception.
+   */
   @Override
   public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 

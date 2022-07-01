@@ -11,18 +11,25 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
+/**
+ * Configuration of Spring Boot Security.
+ */
 @Configuration
 @EnableWebSecurity
 @Order(1)
 public class ApiKeySecurityConfiguration {
 
-  /*
-  * ApiKeyAuthenticationManager : It authenticates Spring security for connecting two locations
-  *                               provides security based on keyfilter
-  * */
-
   private ApiKeyAuthenticationManager apiKeyAuthenticationManager;
 
+  //TODO : integration test
+
+  /**
+   * Add API key filter to Spring http security.
+   *
+   * @param httpSecurity Spring http security.
+   * @return Security Filter Chain based on apiKey.
+   * @throws Exception Exception.
+   */
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
 
