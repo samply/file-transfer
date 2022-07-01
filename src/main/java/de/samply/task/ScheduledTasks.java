@@ -18,7 +18,7 @@ public class ScheduledTasks {
     this.fileTransferTask = fileTransferTask;
   }
 
-  @Scheduled(cron = FileTransferConst.TRANSFER_FILES_CRON_EXPR)
+  @Scheduled(cron = FileTransferConst.TRANSFER_FILES_CRON_EXPR_SV)
   public void transferFiles() {
     fileTransferTask.transfer();
   }

@@ -11,3 +11,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Docker
 - Documentation
 - Project Info
+- Tests

@@ -3,6 +3,7 @@ package de.samply.filetransfer;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.ContentDisposition;
@@ -14,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -23,11 +25,20 @@ import org.springframework.web.client.RestTemplate;
 public class FileTransfer {
 
 
-  @Value(FileTransferConst.TARGET_BRIDGEHEAD_URL)
   private String targetBridgeheadUrl;
-
-  @Value(FileTransferConst.TARGET_BRIDGEHEAD_APIKEY)
   private String targetBridgeheadApiKey;
+
+  @Autowired
+  public void setTargetBridgeheadUrl(
+      @Value(FileTransferConst.TARGET_BRIDGEHEAD_URL_SV) String targetBridgeheadUrl) {
+    this.targetBridgeheadUrl = targetBridgeheadUrl;
+  }
+
+  @Autowired
+  public void setTargetBridgeheadApiKey(
+      @Value(FileTransferConst.TARGET_BRIDGEHEAD_APIKEY_SV) String targetBridgeheadApiKey) {
+    this.targetBridgeheadApiKey = targetBridgeheadApiKey;
+  }
 
   /**
    * Transfer file with targeting bridgehead URL over HTTP.
@@ -37,15 +48,14 @@ public class FileTransfer {
    */
   public void transfer(Path path) throws FileTransferException {
 
-    RestTemplate restTemplate = new RestTemplate();
-    HttpEntity<MultiValueMap<String, Object>> httpEntity = new HttpEntity<>(createBody(path),
-        createHeaders());
+    try {
+      HttpEntity<MultiValueMap<String, Object>> httpEntity = new HttpEntity<>(createBody(path),
+          createHeaders());
 
-    ResponseEntity<String> response = restTemplate.postForEntity(targetBridgeheadUrl, httpEntity,
-        String.class);
-
-    if (response.getStatusCode() != HttpStatus.OK) {
-      throw new FileTransferException(response.getStatusCode() + "-" + path.getFileName());
+      new RestTemplate().postForEntity(targetBridgeheadUrl, httpEntity,
+          String.class);
+    } catch (RestClientException e){
+      throw new FileTransferException(e);
     }
 
   }

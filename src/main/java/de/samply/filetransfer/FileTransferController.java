@@ -31,7 +31,7 @@ public class FileTransferController {
 
   @Autowired
   public void setTransferFilesDirectory(
-      @Value(FileTransferConst.TRANSFER_FILES_DIRECTORY) String transferFilesDirectory) {
+      @Value(FileTransferConst.TRANSFER_FILES_DIRECTORY_SV) String transferFilesDirectory) {
     this.transferFilesDirectory = Paths.get(transferFilesDirectory);
   }
 

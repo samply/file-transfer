@@ -19,7 +19,7 @@ public class ApiKeyAuthenticationManager implements AuthenticationManager {
    * Security: This class provides API key support to REST for connecting different server
    */
 
-  @Value(FileTransferConst.CLIENT_API_KEY)
+  @Value(FileTransferConst.CLIENT_API_KEY_SV)
   private String apiKey;
 
   /**
