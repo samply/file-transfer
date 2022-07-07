@@ -18,9 +18,9 @@
 		<java.version>17</java.version>
 		<maven-model.version>3.8.6</maven-model.version>
 		<slf4j-api.version>1.7.36</slf4j-api.version>
-		<log4j-slf4j-impl.version>2.17.2</log4j-slf4j-impl.version>
+		<log4j-slf4j-impl.version>2.18.0</log4j-slf4j-impl.version>
 		<commons-lang3.version>3.12.0</commons-lang3.version>
-		<junit-jupiter.version>5.8.1</junit-jupiter.version>
+		<junit-jupiter.version>5.8.2</junit-jupiter.version>
 		<testcontainers>1.17.3</testcontainers>
 		<testcontainers.version>1.17.3</testcontainers.version>
 	</properties>

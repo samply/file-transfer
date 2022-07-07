@@ -12,3 +12,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Documentation
 - Project Info
 - Tests
+- Github Workflow
