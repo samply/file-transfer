@@ -21,7 +21,6 @@ public class ApiKeySecurityConfiguration {
 
   private ApiKeyAuthenticationManager apiKeyAuthenticationManager;
 
-  //TODO : integration test
 
   /**
    * Add API key filter to Spring http security.

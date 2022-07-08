@@ -4,7 +4,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import org.apache.commons.lang3.RandomStringUtils;
+import javax.annotation.processing.FilerException;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
@@ -34,9 +34,6 @@ public class FileTransferController {
       @Value(FileTransferConst.TRANSFER_FILES_DIRECTORY_SV) String transferFilesDirectory) {
     this.transferFilesDirectory = Paths.get(transferFilesDirectory);
   }
-
-  //TODO: Integration Test
-
 
   /**
    * Get Mapping for receiving file in second bridgehead.
@@ -71,8 +68,6 @@ public class FileTransferController {
     return model.getGroupId() + ':' + model.getArtifactId() + ':' + model.getVersion();
   }
 
-  // TODO: Integration Test
-
   /**
    * Post file to bridgehead. The file will temporary stored in transfer files directory.
    *
@@ -86,26 +81,22 @@ public class FileTransferController {
     try {
       storeInTransferFileDirectory(multipartFile);
       return ResponseEntity.ok().body("File stored!");
-
-    } catch (IOException e) {
+    } catch (IOException | FileTransferException e) {
       return ResponseEntity.badRequest().body(e.getMessage());
     }
 
   }
 
   private void storeInTransferFileDirectory(MultipartFile multipartFile)
-      throws IOException {
+      throws IOException, FileTransferException {
 
-    String filename =
-        (multipartFile.getOriginalFilename() != null) ? multipartFile.getOriginalFilename()
-            : generateRandomFilename();
-    Path localFile = transferFilesDirectory.resolve(filename);
+    if (multipartFile.getOriginalFilename() == null) {
+      throw new FileTransferException("Missing filename");
+    }
+
+    Path localFile = transferFilesDirectory.resolve(multipartFile.getOriginalFilename());
     multipartFile.transferTo(localFile);
 
-  }
-
-  private String generateRandomFilename() {
-    return RandomStringUtils.random(10, true, false);
   }
 
 }
