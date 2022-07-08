@@ -14,6 +14,7 @@ import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -124,6 +125,7 @@ class FileTransferApplicationTests {
   }
 
   @Test
+  @DisplayName("Test transfer file between two bridgeheads")
   void testTransferFile() throws FileTransferException, InterruptedException {
 
     String bk1Url = getBridgeheadUrl(BK_1_PORT) + FileTransferConst.TRANSFER_URL;
@@ -136,6 +138,7 @@ class FileTransferApplicationTests {
   }
 
   @Test
+  @DisplayName("Test get bridghead version info")
   void testInfo() throws XmlPullParserException, IOException {
 
     RestTemplate restTemplate = new RestTemplate();
@@ -149,6 +152,7 @@ class FileTransferApplicationTests {
   }
 
   @Test
+  @DisplayName("Test transfer file with wrong api key")
   void testTransferFileWithWrongApiKey() {
 
     String bk1Url = getBridgeheadUrl(BK_1_PORT) + FileTransferConst.TRANSFER_URL;
@@ -162,6 +166,7 @@ class FileTransferApplicationTests {
   }
 
   @Test
+  @DisplayName("Test transfer file with no api key")
   void testTransferFilesWithNoApiKey() {
 
     String bk1Url = getBridgeheadUrl(BK_1_PORT) + FileTransferConst.TRANSFER_URL;
