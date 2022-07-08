@@ -8,3 +8,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.0.0] - 2017-03-15
 ### Added
 - REST API Client for data transfer
+- Docker
+- Documentation
+- Project Info
+- Tests
+- Github Workflow
