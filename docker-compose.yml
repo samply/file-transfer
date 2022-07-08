@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  file-transfer-bk1:
+    build: .
+    environment:
+      TRANSFER_FILES_DIRECTORY: "/app/tmp-files"
+      TRANSFER_FILES_CRON_EXPR: "0 * * * * *"
+      CLIENT_API_KEY: "abc123"
+      APPLICATION_PORT: "8080"
+      TARGET_BRIDGEHEAD_URL: "http://file-transfer-bk2:8080/transfer"
+      TARGET_BRIDGEHEAD_APIKEY: "def456"
+    ports:
+      - "8181:8080"
+    volumes:
+      - ./files-bk1:/app/tmp-files
+
+  file-transfer-bk2:
+    build: .
+    environment:
+      TRANSFER_FILES_DIRECTORY: "/app/tmp-files"
+      TRANSFER_FILES_CRON_EXPR: "-"
+      CLIENT_API_KEY: "def456"
+      APPLICATION_PORT: "8080"
+    ports:
+      - "8282:8080"
+    volumes:
+      - ./files-bk2:/app/tmp-files
