@@ -1,13 +1,9 @@
 package de.samply.filetransfer;
 
-import java.io.FileReader;
+import de.samply.utils.ProjectVersion;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import javax.annotation.processing.FilerException;
-import org.apache.maven.model.Model;
-import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
-import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -25,9 +21,10 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 public class FileTransferController {
 
+  private final String projectVersion = ProjectVersion.getProjectVersion();
+
   private Path transferFilesDirectory;
 
-  private final String projectVersion = getProjectVersion();
 
   @Autowired
   public void setTransferFilesDirectory(
@@ -45,28 +42,6 @@ public class FileTransferController {
     return new ResponseEntity<>(projectVersion, HttpStatus.OK);
   }
 
-
-  private String getProjectVersion() {
-    try {
-      return getProjectVersion_WithoutManagementException();
-    } catch (IOException | XmlPullParserException e) {
-      return "File Transfer";
-    }
-  }
-
-  private String getProjectVersion_WithoutManagementException()
-      throws IOException, XmlPullParserException {
-
-    MavenXpp3Reader mavenXpp3Reader = new MavenXpp3Reader();
-    Model model = mavenXpp3Reader.read(new FileReader("pom.xml"));
-
-    return fetchVersion(model);
-
-  }
-
-  private String fetchVersion(Model model) {
-    return model.getGroupId() + ':' + model.getArtifactId() + ':' + model.getVersion();
-  }
 
   /**
    * Post file to bridgehead. The file will temporary stored in transfer files directory.

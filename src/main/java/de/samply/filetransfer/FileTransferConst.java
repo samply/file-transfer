@@ -5,8 +5,10 @@ package de.samply.filetransfer;
  */
 public class FileTransferConst {
 
+  public final static String APP_NAME = "file-transfer";
+
   // HTTP Headers
-  public static final String API_KEY_HEADER = "apiKey";
+  public final static String API_KEY_HEADER = "apiKey";
 
   // REST API path
   public final static String TRANSFER_URL = "/transfer";

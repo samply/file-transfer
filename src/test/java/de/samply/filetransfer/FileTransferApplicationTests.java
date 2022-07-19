@@ -190,7 +190,7 @@ class FileTransferApplicationTests {
   }
 
   private String fetchVersion(Model model) {
-    return model.getGroupId() + ':' + model.getArtifactId() + ':' + model.getVersion();
+    return model.getArtifactId() + ':' + model.getVersion();
   }
 
   private void postFileToBridgehead(Path file, String bridgheadUrl, String apiKey)

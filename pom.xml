@@ -11,7 +11,7 @@
 	<groupId>de.samply</groupId>
 	<artifactId>file-transfer</artifactId>
 	<version>1.0.1-SNAPSHOT</version>
-	<name>file-transfer-client</name>
+	<name>file-transfer</name>
 	<description>Client for transferring data between bridgeheads</description>
 
 	<properties>
