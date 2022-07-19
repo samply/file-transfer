@@ -37,7 +37,8 @@ to bridgehead-2.
 CLIENT_API_KEY: API key  
 APPLICATION_PORT: Port  
 TARGET_BRIDGEHEAD_URL: URL of bridgehead-2  
-TARGET_BRIDGEHEAD_APIKEY: API key of bridgehead-2  
+TARGET_BRIDGEHEAD_APIKEY: API key of bridgehead-2 
+LOG_LEVEL: Spring log level (INFO by default)
 
 
 ## Environment configuration example
