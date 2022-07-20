@@ -31,14 +31,14 @@ java -jar file-transfer.jar
 docker-compose up
 
 ## Environment variables
-TRANSFER_FILES_DIRECTORY: Directory to save files sent to the API.  
-TRANSFER_FILES_CRON_EXPR: How often the directory is checked to transfer the files 
-to bridgehead-2.  
-CLIENT_API_KEY: API key  
-APPLICATION_PORT: Port  
-TARGET_BRIDGEHEAD_URL: URL of bridgehead-2  
-TARGET_BRIDGEHEAD_APIKEY: API key of bridgehead-2 
-LOG_LEVEL: Spring log level (INFO by default)
+[OPTIONAL] TRANSFER_FILES_DIRECTORY: Directory to save files sent to the API.  
+[OPTIONAL] TRANSFER_FILES_CRON_EXPR: How often the directory is checked to transfer the files 
+to bridgehead-2. '-' if file will not be transferred.  
+[OPTIONAL] CLIENT_API_KEY: API key  
+[OPTIONAL] APPLICATION_PORT: Port  
+[OPTIONAL] TARGET_BRIDGEHEAD_URL: URL of bridgehead-2  
+[OPTIONAL] TARGET_BRIDGEHEAD_APIKEY: API key of bridgehead-2
+[OPTIONAL] LOG_LEVEL: Spring log level (INFO by default)
 
 
 ## Environment configuration example
