@@ -1,5 +1,6 @@
 package de.samply.filetransfer;
 
+import de.samply.proxy.ProxyCustomizer;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -25,6 +26,7 @@ public class FileTransfer {
 
   private String targetBridgeheadUrl;
   private String targetBridgeheadApiKey;
+  private RestTemplate restTemplate;
 
   @Autowired
   public void setTargetBridgeheadUrl(
@@ -36,6 +38,12 @@ public class FileTransfer {
   public void setTargetBridgeheadApiKey(
       @Value(FileTransferConst.TARGET_BRIDGEHEAD_APIKEY_SV) String targetBridgeheadApiKey) {
     this.targetBridgeheadApiKey = targetBridgeheadApiKey;
+  }
+
+  @Autowired
+  public void setRestTemplate(ProxyCustomizer proxyCustomizer) {
+    restTemplate = new RestTemplate();
+    proxyCustomizer.customize(restTemplate);
   }
 
   /**
@@ -50,7 +58,7 @@ public class FileTransfer {
       HttpEntity<MultiValueMap<String, Object>> httpEntity = new HttpEntity<>(createBody(path),
           createHeaders());
 
-      new RestTemplate().postForEntity(targetBridgeheadUrl, httpEntity,
+      restTemplate.postForEntity(targetBridgeheadUrl, httpEntity,
           String.class);
     } catch (RestClientException e) {
       throw new FileTransferException(e);

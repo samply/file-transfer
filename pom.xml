@@ -23,6 +23,7 @@
 		<junit-jupiter.version>5.8.2</junit-jupiter.version>
 		<testcontainers>1.17.3</testcontainers>
 		<testcontainers.version>1.17.3</testcontainers.version>
+		<apache-httpclient.version>4.5.13</apache-httpclient.version>
 	</properties>
 
 	<dependencies>
@@ -101,6 +102,12 @@
 			<artifactId>junit-jupiter</artifactId>
 			<version>${testcontainers.version}</version>
 			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>${apache-httpclient.version}</version>
 		</dependency>
 
 	</dependencies>
