@@ -26,7 +26,7 @@ public class FileTransfer {
 
   private String targetBridgeheadUrl;
   private String targetBridgeheadApiKey;
-  private RestTemplate restTemplate;
+  private RestTemplate restTemplate = new RestTemplate();
 
   @Autowired
   public void setTargetBridgeheadUrl(
@@ -42,7 +42,6 @@ public class FileTransfer {
 
   @Autowired
   public void setRestTemplate(ProxyCustomizer proxyCustomizer) {
-    restTemplate = new RestTemplate();
     proxyCustomizer.customize(restTemplate);
   }
 

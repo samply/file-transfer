@@ -41,13 +41,19 @@ public class ProxyCustomizer implements RestTemplateCustomizer {
   public ProxyCustomizer(ProxyVariables proxyVariables) {
 
     httpHost = proxyVariables.getHttpHost();
-    httpPort = (httpHost != null) ? proxyVariables.getHttpPort() : DEFAULT_PORT;
+    if (httpHost != null){
+      httpPort = (proxyVariables.getHttpPort() != null) ? proxyVariables.getHttpPort() : DEFAULT_PORT;
+    }
+
     httpUser = proxyVariables.getHttpUser();
     httpPassword = proxyVariables.getHttpPassword();
     nonProxyHttpHosts = splitNonProxyHosts(proxyVariables.getHttpNohosts());
 
     httpsHost = proxyVariables.getHttpsHost();
-    httpsPort = (httpsHost != null) ? proxyVariables.getHttpsPort() : DEFAULT_PORT;
+    if (httpsHost != null){
+      httpsPort = (proxyVariables.getHttpsPort() != null) ? proxyVariables.getHttpsPort() : DEFAULT_PORT;
+    }
+
     httpsUser = proxyVariables.getHttpsUser();
     httpsPassword = proxyVariables.getHttpsPassword();
     nonProxyHttpsHosts = splitNonProxyHosts(proxyVariables.getHttpsNohosts());
@@ -137,4 +143,3 @@ public class ProxyCustomizer implements RestTemplateCustomizer {
   }
 
 }
-
